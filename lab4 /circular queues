@@ -1,0 +1,71 @@
+#include<stdio.h>
+#include<conio.h>
+#define MAX 4
+int queue[10],rear=-1,front=-1,ch,element,item,size=MAX;
+void insert();
+int Delete();
+void display();
+
+void main(){
+while(1){
+    printf("1:insert\n2:delete\n3:display\n4:exit\n");
+    scanf("%d",&ch);
+    switch(ch){
+        case 1:insert(); break;
+        case 2:item=Delete();{
+            if (item!=-1){
+                printf("the deleted element is= %d\n",item);
+            } break;
+        }
+        case 3:display();break;
+        case 4:exit(0);
+    }
+}
+}
+void insert(){
+    if (rear==(rear+1)%size){
+        printf("The Queue is full");
+        return;
+    }
+    if(front==-1&&rear==-1){
+        front=0;
+        rear=0;
+    }
+    else{
+        rear=(rear+1)%size;
+    }
+    printf("enter the elemnt to insert\n");
+    scanf("%d",&item);
+    queue[rear]=item;
+}
+int Delete(){
+    if (rear==-1&&front==-1){
+        printf("queue is empty");
+        return;
+    }
+    item=queue[rear];
+    if(front==rear){
+        front=-1;
+        rear=-1;
+        return item;
+    }
+    front=(front+1)%size;
+    return item;
+}
+void display(){
+    if(front==-1&&rear==-1){
+        printf("queue is empty");
+        return;
+    }
+    if(front<=rear){
+        for(int i=front;i<=rear;i++){
+            printf("%d\n",queue[i]);
+        }
+    }
+        else {
+            for(int i=front;i<MAX;i++){
+                printf("%d\n",queue[i]);
+            }
+        }
+    }
+
