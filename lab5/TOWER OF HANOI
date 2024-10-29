@@ -1,0 +1,20 @@
+#include<stdio.h>
+void hanoi(int n,char A,char B,char Temp){
+    if (n==1){
+        printf("move disc %d from %c to %c\n",n,A,B);
+    }
+    else{
+        hanoi(n-1,A,B,Temp);
+        printf("move disc %d from %c to %c \n",n-1,Temp,A);
+        hanoi(n,A,B,Temp);
+    }
+
+}
+void main(){
+    int num;
+    char s="A",d="B",temp="t";
+    printf("enter number of discs\t");
+    scanf("%d",&num);
+    hanoi(num,s,temp,d);
+}
+
