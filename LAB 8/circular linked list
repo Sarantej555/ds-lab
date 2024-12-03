@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* link;
+};
+
+struct Node* start = NULL;
+struct Node* createNode(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->link = NULL;
+    return newNode;
+}
+
+void createCircularLinkedList(int values[], int n) {
+    if (n == 0) {
+        printf("No values provided to create the circular linked list.\n");
+        return;
+    }
+
+    struct Node* newNode, *temp;
+    for (int i = 0; i < n; i++) {
+        newNode = createNode(values[i]); 
+        if (start == NULL) {
+            start = newNode;    
+            newNode->link = start; 
+        } else {
+            temp = start;
+            while (temp->link != start) { 
+                temp = temp->link;
+            }
+            temp->link = newNode; 
+            newNode->link = start; 
+        }
+    }
+    printf("Circular linked list created with %d nodes.\n", n);
+}
+
+void displayCircularLinkedList() {
+    if (start == NULL) {
+        printf("The circular linked list is empty.\n");
+        return;
+    }
+
+    struct Node* temp = start;
+    printf("Circular Linked List: ");
+    do {
+        printf("%d -> ", temp->data);
+        temp = temp->link;
+    } while (temp != start); 
+    printf("(back to start)\n");
+}
+
+int main() {
+    int values[] = {10, 20, 30, 40, 50}; 
+    int n = sizeof(values) / sizeof(values[0]); 
+
+    // Create the circular linked list
+    createCircularLinkedList(values, n);
+
+    // Display the circular linked list
+    displayCircularLinkedList();
+
+    return 0;
+}
